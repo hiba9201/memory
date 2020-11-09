@@ -1,4 +1,4 @@
-const noNameCard = "Неизвестная карта";
+const  noNameCard = "Неизвестная карта";
 
 class Game {
   constructor(selector, countCards, sameCardCount) {
@@ -40,19 +40,13 @@ class Game {
       const firstCard = this.compareArray[0].id;
       const secondCard = this.compareArray[1].id;
       if (this.compareArray[0].cardNumber === this.compareArray[1].cardNumber) {
-        document.querySelector(`[data-id="${firstCard}"]`).dataset.status =
-          "true";
-        document.querySelector(`[data-id="${secondCard}"]`).dataset.status =
-          "true";
+        document.querySelector(`[data-id="${firstCard}"]`).dataset.status = "true";
+        document.querySelector(`[data-id="${secondCard}"]`).dataset.status = "true";
         this.updateScore();
       } else {
         setTimeout(() => {
-          document.querySelector(
-            `[data-id="${firstCard}"]`
-          ).innerHTML = noNameCard;
-          document.querySelector(
-            `[data-id="${secondCard}"]`
-          ).innerHTML = noNameCard;
+          document.querySelector(`[data-id="${firstCard}"]`).innerHTML = noNameCard;
+          document.querySelector(`[data-id="${secondCard}"]`).innerHTML = noNameCard;
         }, 1000);
       }
       this.compareArray = [];
@@ -73,8 +67,8 @@ class Card {
   constructor() {}
 }
 
-function randomSortArray(arr) {
-  return arr.sort(() => Math.random() - 0.5);
+function randomSortArray(arr) { 
+     return arr.sort(() => Math.random() - 0.5); 
 }
 
 const game = new Game("#playArea", 20, 4);
