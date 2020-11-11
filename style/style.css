@@ -1,0 +1,18 @@
+#playArea{
+    margin:0 auto;
+    border: 3px solid #ccc;
+    height: 500px;
+    width: 1000px;
+}
+#table{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.card{
+    margin: 10px 20px;
+    width: 150px;
+    height: 100px;
+    border: 3px solid red;
+}
