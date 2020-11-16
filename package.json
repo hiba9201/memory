@@ -1,0 +1,31 @@
+{
+  "name": "memory-game",
+  "version": "1.0.0",
+  "description": "something interesting",
+  "main": " \t",
+  "dependencies": {
+    "@webpack-cli/init": "^1.0.3"
+  },
+  "devDependencies": {
+    "css-loader": "^5.0.1",
+    "html-webpack-plugin": "^4.5.0",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "scripts": {
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiba9201/memory.git"
+  },
+  "author": "Sanya & Nastya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hiba9201/memory/issues"
+  },
+  "homepage": "https://github.com/hiba9201/memory#readme"
+}
