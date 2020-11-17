@@ -1,3 +1,6 @@
+import './style/style.css';
+import { randomSortArray } from './utils'
+
 const  noNameCard = "Неизвестная карта";
 
 class Game {
@@ -67,9 +70,6 @@ class Card {
   constructor() {}
 }
 
-function randomSortArray(arr) { 
-     return arr.sort(() => Math.random() - 0.5); 
-}
 
 const game = new Game("#playArea", 20, 4);
 
