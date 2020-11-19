@@ -1,41 +1,45 @@
-import './style/style.css';
-import { randomSortArray } from './utils'
+import { randomSortArray } from '../utils'
+import Card from "../Card/Card";
+
+import '../style/style.css';
 
 const  noNameCard = "Неизвестная карта";
 
-class Game {
+export default class Game {
   constructor(selector, countCards, sameCardCount) {
     this._playArea = document.querySelector(selector);
-    this.setCards(countCards, sameCardCount);
-    this.setScore(0);
-    this.clickHandler = this.clickHandler.bind(this);
-    this._playArea.addEventListener("click", this.clickHandler);
+    this.tableNode = this.createTableNode();
+    this._playArea.appendChild(this.tableNode);
     this.compareArray = [];
     this.score = 0;
+    this.setCards(countCards, sameCardCount);
+    this.setScore(0);
+  }
+
+  createTableNode() {
+    const table = document.createElement('div');
+    table.setAttribute('id', 'table');
+
+    return table;
   }
 
   setCards(count, sameCardCount) {
     let cards = [];
-    for (let i = 0; i < count / sameCardCount; i++) {
-      for (let j = 0; j < sameCardCount; j++) {
-        cards.push(
-          `<div class="card" data-id=${
-            i * sameCardCount + j
-          } data-status="false" data-type="${i}">${noNameCard}</div>`
-        );
+
+    const { tableNode } = this;
+
+    let id = 1;
+    for (let i = 1; i <= count / sameCardCount; i++) {
+      for (let j = 1; j <= sameCardCount; j++) {
+        cards.push(new Card(id++, i, tableNode, this));
       }
     }
-    randomSortArray(cards);
-    this._playArea.innerHTML = `<div id="table">${cards.join("")}</div>`;
-  }
 
-  clickHandler(event) {
-    const { type, id, status } = event.target.dataset;
-    if (type && this.compareArray.length < 2 && status === "false") {
-      this.compareArray.push({ cardNumber: type, id });
-      event.target.innerHTML = type;
-    }
-    this.checkSameCards();
+    randomSortArray(cards);
+
+    cards.forEach(card => {
+      card.view.render();
+    });
   }
 
   checkSameCards() {
@@ -57,7 +61,11 @@ class Game {
   }
 
   setScore(score) {
-    this._playArea.innerHTML += `<p id="score">${score}</p>`;
+    const scoreNode = document.createElement('p')
+    scoreNode.setAttribute('id', 'score');
+    scoreNode.innerText = score;
+
+    this._playArea.appendChild(scoreNode);
   }
 
   updateScore() {
@@ -66,11 +74,3 @@ class Game {
   }
 }
 
-class Card {
-  constructor() {}
-}
-
-
-const game = new Game("#playArea", 20, 4);
-
-console.log(game);

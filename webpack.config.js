@@ -2,7 +2,7 @@ const path = require('path');
 const HTMLplugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './src/game.js',
+    entry: './src/index.js',
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'public')
@@ -18,10 +18,10 @@ module.exports = {
     ],
     module: {
         rules: [
-          {
-            test: /\.css$/i,
-            use: ["style-loader", "css-loader"],
-          },
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"],
+            },
         ],
       },
 }

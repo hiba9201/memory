@@ -1,18 +1,42 @@
-#playArea{
+#playArea {
     margin:0 auto;
     border: 3px solid #ccc;
     height: 500px;
     width: 1000px;
 }
-#table{
+
+#table {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
     justify-content: space-around;
 }
-.card{
+
+.card {
     margin: 10px 20px;
+    padding: 16px;
     width: 150px;
     height: 100px;
-    border: 3px solid red;
+    cursor: pointer;
+    box-sizing: border-box;
+
+    color: #fff;
+    font-family: "PT Root UI", Roboto, Helvetica, arial, sans-serif;
+    font-size: 62px;
+    vertical-align: bottom;
+
+    transition: transform 120ms ease-out;
+}
+
+.card:hover {
+    opacity: .9;
+    transform: scale(1.02);
+}
+
+.card.hidden {
+    background-color: #c4c4c4;
+}
+
+.card.open {
+    background-color: cornflowerblue;
 }
