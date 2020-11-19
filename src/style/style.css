@@ -28,7 +28,7 @@
     transition: transform 120ms ease-out;
 }
 
-.card:hover {
+.card:not(.open):hover {
     opacity: .9;
     transform: scale(1.02);
 }
@@ -39,4 +39,5 @@
 
 .card.open {
     background-color: cornflowerblue;
+    cursor: auto;
 }

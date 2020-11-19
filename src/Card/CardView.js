@@ -1,33 +1,18 @@
 export default class CardView {
-    constructor(container, name, id, onClick, game) {
+    constructor(container, name, id, context) {
         this.hidden = true;
         this.color = '#ffffff';
         this.container = container;
         this.name = name;
         this.node = null;
         this.id = id;
-        this.game = game;
+        this.onClick = () => this.flipCard();
+        this.context = context;
     }
 
     flipCard() {
         this.hidden = !this.hidden;
         this.updateView();
-    }
-
-    handleClickEvent() {
-        console.log('dd')
-        if (!this.hidden) {
-            return;
-        }
-
-        this.flipCard();
-        setTimeout(() => {
-            this.flipCard();
-        }, 1000);
-    }
-
-    disableFlip() {
-        this.node.removeEventListener('click', this.handleClickEvent);
     }
 
     updateView() {
@@ -42,12 +27,16 @@ export default class CardView {
         }
     }
 
+    setOnClick(func) {
+        this.onClick = func;
+    }
+
     render() {
         const cardContainer = document.createElement('div');
         cardContainer.classList.add('card');
         cardContainer.classList.add(this.hidden ? 'hidden' : 'open');
         cardContainer.id = this.id;
-        cardContainer.addEventListener('click', () => this.handleClickEvent());
+        cardContainer.addEventListener('click', () => this.onClick());
 
         if (!this.hidden) {
             cardContainer.innerText = this.name;
