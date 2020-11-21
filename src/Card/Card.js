@@ -28,8 +28,9 @@ export default class Card {
         } else if (view.hidden && compareArray.length === 1) {
             const otherCard = compareArray.pop();
             if (this.compareCards(otherCard)) {
-                this.game.updateScore();
+                this.game.updateScorePoints(true);
             } else {
+                this.game.updateScorePoints(false); //можно ничего не передавать, но как лучше - х3
                 setTimeout(() => {
                     view.flipCard();
                     otherCard.view.flipCard();
