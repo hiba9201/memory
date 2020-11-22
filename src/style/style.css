@@ -1,46 +1,66 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.wrapper {
+    padding: 40px;
+    background-color: #e5e5e5;
+    min-height: 100%;
+    box-sizing: border-box;
+}
+
 #playArea {
-    margin:0 auto;
-    border: 3px solid #ccc;
-    height: 500px;
+    margin: 0 auto;
     width: 1000px;
     position: relative;
+    padding: 20px;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    background-color: #fff;
 }
 
-#table {
-    display: flex;
+.table {
+    display: grid;
     width: 100%;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-gap: 20px;
+    margin-bottom: 30px;
 }
 
-.score{
-    width: 95%;
-    height: 50px;
+.score {
     background-color: #ccc;
-    
-    
+
     margin: 0 auto;
+    padding: 10px;
     position: relative;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    border-radius: 5px;
 }
 
-.scoreCount{
-    height: 70%;
-    width: 20%;
+.scoreCount-container {
+    height: 40px;
     position: relative;
     padding-left: 5px;
+    margin-right: 10px;
+    flex-grow: 2;
+    flex-basis: 120px;
 
     font-family: "PT Root UI", Roboto, Helvetica, arial, sans-serif;
     font-size: 34px;
     background-color: #fff;
-    
+}
+
+.scoreCount {
+    margin: 0;
 }
 
 .scoreLine{
-    width: 70%;
-    height: 70%;
+    width: 80%;
+    height: 40px;
+    flex-grow: 4;
     position: relative;
 
     background: rgb(231,231,231);
@@ -50,7 +70,7 @@
 .scoreBonus{
     width: 20%;
     height: 100%;
-    background-color: cornflowerblue;
+    background-color: #57e4a9;
     transition: 2s all linear;
 }
 
@@ -71,7 +91,7 @@
 }
 
 .scoreMessageYellow{
-    color: rgb(243, 157, 28)
+    color: rgb(243, 157, 28);
 }
 
 .scoreMessageHide{
@@ -91,31 +111,36 @@
 }
 
 .card {
-    margin: 10px 20px;
-    padding: 16px;
-    width: 150px;
-    height: 100px;
+    padding: 10px;
+    height: 120px;
     cursor: pointer;
     box-sizing: border-box;
+    border-radius: 5px;
 
     color: #fff;
     font-family: "PT Root UI", Roboto, Helvetica, arial, sans-serif;
     font-size: 62px;
+    line-height: 150px;
     vertical-align: bottom;
+    transform: scale(-1, 1);
 
-    transition: transform 120ms ease-out;
+    transition: transform 160ms ease-out, background-color 90ms linear, color 90ms linear;
 }
 
-.card:not(.open):hover {
+.card.hidden:hover {
     opacity: .9;
-    transform: scale(1.02);
+    transform: rotateY(0) scale(-1.02, 1.02);
 }
 
 .card.hidden {
     background-color: #c4c4c4;
+    transform: rotateY(0) scale(-1, 1);
+    color: transparent;
 }
 
 .card.open {
-    background-color: cornflowerblue;
+    background-color: #84d966;
     cursor: auto;
+    pointer-events: none;
+    transform: rotateY(180deg) scale(-1, 1);
 }

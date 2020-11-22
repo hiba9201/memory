@@ -7,7 +7,6 @@ export default class CardView {
         this.node = null;
         this.id = id;
         this.onClick = () => this.flipCard();
-        this.context = context;
     }
 
     flipCard() {
