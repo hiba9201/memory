@@ -26,7 +26,7 @@
     align-items: center;
 }
 
-.scoreCount{
+.score-count{
     height: 70%;
     width: 20%;
     position: relative;
@@ -38,7 +38,7 @@
     
 }
 
-.scoreLine{
+.score-line{
     width: 70%;
     height: 70%;
     position: relative;
@@ -47,14 +47,14 @@
     background: linear-gradient(90deg, rgba(231,231,231,1) 12%, rgba(236,236,236,0.5245448521205357) 100%);
 }
 
-.scoreBonus{
+.score-bonus{
     width: 20%;
     height: 100%;
     background-color: cornflowerblue;
     transition: 2s all linear;
 }
 
-.scoreMessage{
+.score-message{
     position: absolute;
     top: 0;
     left: 0;
@@ -74,13 +74,13 @@
     color: rgb(243, 157, 28)
 }
 
-.scoreMessageHide{
-    top: -100% !important;
+.score-message-hide{
+    top: -100%;
     opacity: 0;
 }
 
 
-.scoreBonusCoef{
+.score-bonus-coef{
     position: absolute;
     top: 0;
     left: 5px;

@@ -1,10 +1,11 @@
-import { randomSortArray } from '../utils'
+import { randomSortArray } from '../utils';
+import { getLimitedScoreCoef } from '../utils'
 import Card from "../Card/Card";
 
 import '../style/style.css';
 
 export default class Game {
-  constructor(selector, countCards, sameCardCount, scoreDownSpeed, score) {
+  constructor(selector, countCards, sameCardCount, scoreReduceSpeed, score) {
     this._playArea = document.querySelector(selector);
     this.tableNode = this.createTableNode();
     this._playArea.appendChild(this.tableNode);
@@ -13,8 +14,8 @@ export default class Game {
     this.scoreCoef = 1;
     this.setCards(countCards, sameCardCount);
     this.setScore(0);
-    this.scoreDownSpeed = scoreDownSpeed;
-    this.startScore();
+    this.scoreReduceSpeed = scoreReduceSpeed;
+    this.startReduceScoreCoef();
   }
 
   createTableNode() {
@@ -43,18 +44,15 @@ export default class Game {
     });
   }
 
-  startScore(){
-    //через 1 сек начинаем уменьшать коэф очков
+  startReduceScoreCoef(){
     setTimeout(()=>{
       setInterval(()=>{
-        const newScore = this.scoreCoef - 0.1;
+        const newCoef = this.scoreCoef - 0.1;
         
-        //Не меньше 0.5 и не больше 5 + округляем
-        this.scoreCoef = Math.min(Math.max(newScore.toFixed(2), 0.5), 5);
+        this.scoreCoef = getLimitedScoreCoef(newCoef)
         
         this.updateScoreLine();
-
-      }, this.scoreDownSpeed);
+      }, this.scoreReduceSpeed);
     }, 1000)
     
   }
@@ -64,47 +62,47 @@ export default class Game {
     scoreNode.classList.add('score');
 
     const scoreCount = document.createElement('div');
-    scoreCount.classList.add('scoreCount');
+    scoreCount.classList.add('score-count');
+    scoreCount.textContent = this.score;
     scoreNode.appendChild(scoreCount);
 
     const scoreLine = document.createElement('div');
-    scoreLine.classList.add('scoreLine');
+    scoreLine.classList.add('score-line');
     scoreNode.appendChild(scoreLine);
 
     const scoreBonus = document.createElement('div');
-    scoreBonus.classList.add('scoreBonus');
+    scoreBonus.classList.add('score-bonus');
     scoreLine.appendChild(scoreBonus);
 
     const scoreBonusCoef = document.createElement('div');
-    scoreBonusCoef.classList.add('scoreBonusCoef');
-    scoreBonusCoef.textContent = `x${this.scoreCoef}`
+    scoreBonusCoef.classList.add('score-bonus-coef');
+    scoreBonusCoef.textContent = `x${this.scoreCoef}`;
     scoreLine.appendChild(scoreBonusCoef);
 
     this._playArea.appendChild(scoreNode);
-    document.querySelector(".scoreCount").textContent = this.score;
+    
   }
 
-  updateScorePoints(flag) {
-    let newScore;
+  updateScorePoints(isGuessedPair) {
     const points = 10000;
 
-    if(flag) {
-      const addPoints = points * this.scoreCoef
-      newScore = this.score + addPoints;
+    if(isGuessedPair) {;
+      const addPoints = points * this.scoreCoef;
+      this.score += addPoints;
       this.scoreCoef++;
-      this.score = newScore;
 
-      //нетрудно заметить, что строку ниже можно вынести за условие, но не, она затрет класс сообщения о очках
-      document.getElementsByClassName('scoreCount')[0].textContent = this.score;
-      this.updateScorePointMessage(addPoints)
-    } else {
-      let removePoints = points / 10
-      newScore = this.score - removePoints;
+      document.querySelector('.score-count').textContent = this.score;
+      this.updateScorePointMessage(addPoints);
+      } else {
+      let removePoints = points / 10;
+      const newScore = this.score - removePoints;
       this.score = Math.max(newScore, 0);
 
-      document.getElementsByClassName('scoreCount')[0].textContent = this.score;
+      document.querySelector('.score-count').textContent = this.score;
 
-      if(this.score < removePoints) removePoints = this.score
+      if (this.score < removePoints) {
+        removePoints = this.score;
+      } 
 
       this.updateScorePointMessage(-removePoints);
     }
@@ -112,19 +110,19 @@ export default class Game {
   }
 
   updateScoreLine() {
-    document.getElementsByClassName('scoreBonus')[0].style.width = `${this.scoreCoef*20}%`;
-    document.querySelector('.scoreBonusCoef').textContent =  'x' + this.scoreCoef;
+    document.querySelector('.score-bonus').style.width = `${this.scoreCoef*20}%`;
+    document.querySelector('.score-bonus-coef').textContent =  `x${this.scoreCoef}`;
   }
 
   updateScorePointMessage(points){
     const message = document.createElement('div');
-    message.classList.add('scoreMessage');
+    message.classList.add('score-message');
 
-    if(points > 0) {
+    if (points > 0) {
       message.classList.add('scoreMessageGreen');
-      message.textContent = '+' + points;
+      message.textContent = `+${points}`;
     } 
-    else if(points === 0) {
+    else if (points === 0) {
       message.classList.add('scoreMessageYellow');
       message.textContent = points;
     } 
@@ -133,14 +131,14 @@ export default class Game {
       message.textContent = points;
     }
 
-    document.querySelector('.scoreCount').append(message) ;
+    document.querySelector('.score-count').appendChild(message);
 
     setTimeout(()=> {
-      message.classList.add('scoreMessageHide');
+      message.classList.add('score-message-hide');
     }, 10);
     
     setTimeout(()=> {
-      message.remove()
+      message.remove();
     }, 2000);
   }
 }
