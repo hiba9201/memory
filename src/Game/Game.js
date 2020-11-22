@@ -86,7 +86,7 @@ export default class Game {
   updateScorePoints(isGuessedPair) {
     const points = 10000;
 
-    if(isGuessedPair) {;
+    if (isGuessedPair) {
       const addPoints = points * this.scoreCoef;
       this.score += addPoints;
       this.scoreCoef++;
@@ -110,7 +110,7 @@ export default class Game {
   }
 
   updateScoreLine() {
-    document.querySelector('.score-bonus').style.width = `${this.scoreCoef*20}%`;
+    document.querySelector('.score-bonus').style.width = `${this.scoreCoef * 20}%`;
     document.querySelector('.score-bonus-coef').textContent =  `x${this.scoreCoef}`;
   }
 
