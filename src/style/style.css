@@ -1,121 +1,122 @@
 #playArea {
-    margin:0 auto;
-    border: 3px solid #ccc;
-    height: 500px;
-    width: 1000px;
-    position: relative;
+  margin: 0 auto;
+  border: 3px solid #ccc;
+  height: 500px;
+  width: 1000px;
+  position: relative;
 }
 
 #table {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: space-around;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.score{
-    width: 95%;
-    height: 50px;
-    background-color: #ccc;
-    
-    
-    margin: 0 auto;
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.score {
+  width: 95%;
+  height: 50px;
+  background-color: #ccc;
+
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.score-count{
-    height: 70%;
-    width: 20%;
-    position: relative;
-    padding-left: 5px;
+.score-count {
+  height: 70%;
+  width: 20%;
+  position: relative;
+  padding-left: 5px;
 
-    font-family: "PT Root UI", Roboto, Helvetica, arial, sans-serif;
-    font-size: 34px;
-    background-color: #fff;
-    
+  font-family: "PT Root UI", Roboto, Helvetica, arial, sans-serif;
+  font-size: 34px;
+  background-color: #fff;
 }
 
-.score-line{
-    width: 70%;
-    height: 70%;
-    position: relative;
+.score-line {
+  width: 70%;
+  height: 70%;
+  position: relative;
 
-    background: rgb(231,231,231);
-    background: linear-gradient(90deg, rgba(231,231,231,1) 12%, rgba(236,236,236,0.5245448521205357) 100%);
+  background: rgb(231, 231, 231);
+  background: linear-gradient(
+    90deg,
+    rgba(231, 231, 231, 1) 12%,
+    rgba(236, 236, 236, 0.5245448521205357) 100%
+  );
 }
 
-.score-bonus{
-    width: 20%;
-    height: 100%;
-    background-color: cornflowerblue;
-    transition: 2s all linear;
+.score-bonus {
+  width: 20%;
+  height: 100%;
+  background-color: cornflowerblue;
+  transition: 2s all linear;
 }
 
-.score-message{
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: 2s all linear;
-    font-size: 24px;
+.score-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: 2s all linear;
+  font-size: 24px;
 }
 
-.scoreMessageGreen{
-    color: green;
+.score-message_color_success {
+  color: green;
 }
 
-.scoreMessageRed{
-    color: red;
+.score-message_color_fail {
+  color: red;
 }
 
-.scoreMessageYellow{
-    color: rgb(243, 157, 28)
+.score-message_color_neutral {
+  color: rgb(243, 157, 28);
 }
 
-.score-message-hide{
-    top: -100%;
-    opacity: 0;
+.score-message-hide {
+  top: -100%;
+  opacity: 0;
 }
 
+.score-bonus-coef {
+  position: absolute;
+  top: 0;
+  left: 5px;
 
-.score-bonus-coef{
-    position: absolute;
-    top: 0;
-    left: 5px;
-
-    font-family: "PT Root UI", Roboto, Helvetica, arial, sans-serif;
-    font-size: 34px;
-    color: #fff;
+  font-family: "PT Root UI", Roboto, Helvetica, arial, sans-serif;
+  font-size: 34px;
+  color: #fff;
 }
 
 .card {
-    margin: 10px 20px;
-    padding: 16px;
-    width: 150px;
-    height: 100px;
-    cursor: pointer;
-    box-sizing: border-box;
+  margin: 10px 20px;
+  padding: 16px;
+  width: 150px;
+  height: 100px;
+  cursor: pointer;
+  box-sizing: border-box;
 
-    color: #fff;
-    font-family: "PT Root UI", Roboto, Helvetica, arial, sans-serif;
-    font-size: 62px;
-    vertical-align: bottom;
+  color: #fff;
+  font-family: "PT Root UI", Roboto, Helvetica, arial, sans-serif;
+  font-size: 62px;
+  vertical-align: bottom;
 
-    transition: transform 120ms ease-out;
+  transition: transform 120ms ease-out;
 }
 
 .card:not(.open):hover {
-    opacity: .9;
-    transform: scale(1.02);
+  opacity: 0.9;
+  transform: scale(1.02);
 }
 
 .card.hidden {
-    background-color: #c4c4c4;
+  background-color: #c4c4c4;
 }
 
 .card.open {
-    background-color: cornflowerblue;
-    cursor: auto;
+  background-color: cornflowerblue;
+  cursor: auto;
 }

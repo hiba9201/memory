@@ -119,15 +119,15 @@ export default class Game {
     message.classList.add('score-message');
 
     if (points > 0) {
-      message.classList.add('scoreMessageGreen');
+      message.classList.add('score-message_color_success');
       message.textContent = `+${points}`;
     } 
     else if (points === 0) {
-      message.classList.add('scoreMessageYellow');
+      message.classList.add('.score-message_color_neutral');
       message.textContent = points;
     } 
     else {
-      message.classList.add('scoreMessageRed');
+      message.classList.add('.score-message_color_fail');
       message.textContent = points;
     }
 
