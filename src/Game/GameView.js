@@ -24,25 +24,25 @@ export default class GameView {
         scoreNode.classList.add('score');
 
         const scoreCountContainer = document.createElement('div');
-        scoreCountContainer.classList.add('scoreCount-container');
+        scoreCountContainer.classList.add('score-count__container');
 
         this.scoreCount = document.createElement('p');
-        this.scoreCount.classList.add('scoreCount');
+        this.scoreCount.classList.add('score-count');
         this.scoreCount.textContent = this.context.score;
         scoreCountContainer.appendChild(this.scoreCount);
 
         scoreNode.appendChild(scoreCountContainer);
 
         const scoreLine = document.createElement('div');
-        scoreLine.classList.add('scoreLine');
+        scoreLine.classList.add('score-line');
         scoreNode.appendChild(scoreLine);
 
         const scoreBonus = document.createElement('div');
-        scoreBonus.classList.add('scoreBonus');
+        scoreBonus.classList.add('score-bonus');
         scoreLine.appendChild(scoreBonus);
 
         const scoreBonusCoef = document.createElement('div');
-        scoreBonusCoef.classList.add('scoreBonusCoef');
+        scoreBonusCoef.classList.add('score-bonus__coef');
         scoreBonusCoef.textContent = `x${this.context.scoreCoef}`
         scoreLine.appendChild(scoreBonusCoef);
 
@@ -50,8 +50,8 @@ export default class GameView {
     }
 
     updateScoreLine() {
-        document.querySelector('.scoreBonus').style.width = `${this.context.scoreCoef * 20}%`;
-        document.querySelector('.scoreBonusCoef').textContent =  `x${this.context.scoreCoef}`;
+        document.querySelector('.score-bonus').style.width = `${this.context.scoreCoef * 20}%`;
+        document.querySelector('.score-bonus__coef').textContent =  `x${this.context.scoreCoef}`;
     }
 
     updateScore() {
@@ -60,25 +60,25 @@ export default class GameView {
 
     updateScorePointMessage(points){
         const message = document.createElement('div');
-        message.classList.add('scoreMessage');
+        message.classList.add('score-message');
 
         if(points > 0) {
-            message.classList.add('scoreMessageGreen');
+            message.classList.add('score-message_color_success');
             message.textContent = '+' + points;
         }
         else if(points === 0) {
-            message.classList.add('scoreMessageYellow');
+            message.classList.add('score-message_color_neutral');
             message.textContent = points;
         }
         else {
-            message.classList.add('scoreMessageRed');
+            message.classList.add('score-message_color_fail');
             message.textContent = points;
         }
 
-        document.querySelector('.scoreCount-container').appendChild(message);
+        document.querySelector('.score-count__container').appendChild(message);
 
         setTimeout(()=> {
-            message.classList.add('scoreMessageHide');
+            message.classList.add('score_message_hide');
         }, 10);
 
         setTimeout(()=> {

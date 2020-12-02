@@ -1,23 +1,23 @@
-import { randomSortArray } from '../utils'
+import { randomSortArray, getLimitedScoreCoef } from '../utils';
 import Card from "../Card/Card";
 import GameView from "./GameView";
 
 import '../style/style.css';
 
 export default class Game {
-  constructor(selector, countCards, sameCardCount, scoreDownSpeed, score) {
+  constructor(selector, countCards, sameCardCount, scoreReduceSpeed, score) {
     this.view = new GameView(this, selector);
     this.compareArray = [];
     this.score = score;
     this.scoreCoef = 1;
     this.setCards(countCards, sameCardCount);
-    this.setScore(scoreDownSpeed);
+    this.setScore(scoreReduceSpeed);
   }
 
   setScore(scoreReduceSpeed) {
     this.view.renderScore();
     this.scoreDownSpeed = scoreReduceSpeed;
-    this.startScore();
+    this.startReduceScoreCoef();
   }
 
   setCards(count, sameCardCount) {
@@ -35,25 +35,23 @@ export default class Game {
     this.view.renderCards(cards);
   }
 
-  startScore() {
-    //через 1 сек начинаем уменьшать коэф очков
+  startReduceScoreCoef() {
     setTimeout(() => {
       setInterval(() => {
         const newScore = this.scoreCoef - 0.1;
-        
-        //Не меньше 0.5 и не больше 5 + округляем
-        this.scoreCoef = Math.min(Math.max(newScore.toFixed(2), 0.5), 5);
+
+        this.scoreCoef = getLimitedScoreCoef(newScore);
         
         this.view.updateScoreLine();
       }, this.scoreDownSpeed);
     }, 1000);
   }
 
-  updateScorePoints(flag) {
+  updateScorePoints(isGuessedPair) {
     let changePoints;
     const points = 10000;
 
-    if (flag) {
+    if (isGuessedPair) {
       changePoints = points * this.scoreCoef
       this.scoreCoef++;
       this.score += changePoints;
