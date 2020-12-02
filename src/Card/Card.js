@@ -4,10 +4,7 @@ export default class Card {
     constructor(id, num, container, context) {
         this.num = num;
         this.game = context;
-        this.view = new CardView(container, num, id, {
-            game: context,
-            card: this,
-        });
+        this.view = new CardView(container, num, id);
     }
 
     compareCards(other) {
@@ -27,6 +24,7 @@ export default class Card {
             compareArray.push(this);
         } else if (view.hidden && compareArray.length === 1) {
             const otherCard = compareArray.pop();
+
             if (this.compareCards(otherCard)) {
                 this.game.updateScorePoints(true);
             } else {
@@ -34,7 +32,7 @@ export default class Card {
                 setTimeout(() => {
                     view.flipCard();
                     otherCard.view.flipCard();
-                }, 1000);
+                }, 800);
             }
         }
 
