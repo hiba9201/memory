@@ -74,6 +74,15 @@ body, html {
     transition: 2s all linear;
 }
 
+.score-message {
+    position: absolute;
+    top: 0;
+    left: 7px;
+    transition: 2s all linear;
+    font-size: 24px;
+}
+
+
 .score-message_color_success {
     color: green;
 }
