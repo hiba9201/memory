@@ -31,7 +31,6 @@ export const drawCardImage = (type, id) => {
 
             if (type === CardTypes.GROUND) {
                 background.style.backgroundColor = getBGColor(id, type);
-                console.log(getSVGImageURL(id, type));
                 imageSVG.src = getSVGImageURL(id, type);
             } else if (type === CardTypes.AQUA) {
                 background.style.backgroundColor = getBGColor(id, type);

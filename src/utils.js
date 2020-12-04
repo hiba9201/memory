@@ -35,7 +35,7 @@ export function getBGColor (id, type) {
 }
 
 export function getSVGImageURL (id, type) {
-    const baseURL = '../../public/icons/';
+    const baseURL = '../static/icons/';
 
     if (type === CardTypes.GROUND) {
         const url =  baseURL + 'animals/' + AnimalsSVGImagesOrder[id] + '.svg';
