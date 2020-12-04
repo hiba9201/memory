@@ -1,10 +1,11 @@
 import CardView from "./CardView";
 
 export default class Card {
-    constructor(id, num, container, context) {
+    constructor(id, num, container, context, cardType) {
+        this.type = cardType;
         this.num = num;
         this.game = context;
-        this.view = new CardView(container, num, id);
+        this.view = new CardView(container, num, id, cardType);
     }
 
     compareCards(other) {
@@ -28,7 +29,7 @@ export default class Card {
             if (this.compareCards(otherCard)) {
                 this.game.updateScorePoints(true);
             } else {
-                this.game.updateScorePoints(false); //можно ничего не передавать, но как лучше - х3
+                this.game.updateScorePoints(false);
                 setTimeout(() => {
                     view.flipCard();
                     otherCard.view.flipCard();

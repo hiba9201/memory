@@ -1,11 +1,15 @@
+import { drawCardImage } from './DrawCardSide';
+
 export default class CardView {
-    constructor(container, name, id, context) {
+    constructor(container, name, id, cardType, context) {
         this.hidden = true;
         this.color = '#ffffff';
         this.container = container;
         this.name = name;
         this.node = null;
         this.id = id;
+        this.type = cardType;
+        this.image = drawCardImage(cardType, name);
         this.onClick = () => this.flipCard();
     }
 
@@ -22,7 +26,7 @@ export default class CardView {
         } else {
             this.node.classList.remove('hidden');
             this.node.classList.add('open');
-            this.node.innerText = this.name;
+            this.node.appendChild(this.image);
         }
     }
 

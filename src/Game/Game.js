@@ -1,4 +1,4 @@
-import { randomSortArray, getLimitedScoreCoef } from '../utils';
+import { randomSortArray, getLimitedScoreCoef, getRandomCardType } from '../utils';
 import Card from "../Card/Card";
 import GameView from "./GameView";
 
@@ -25,9 +25,11 @@ export default class Game {
     const { tableNode } = this.view;
 
     let id = 1;
+    let cardType;
     for (let i = 1; i <= count / sameCardCount; i++) {
+      cardType = getRandomCardType();
       for (let j = 1; j <= sameCardCount; j++) {
-        cards.push(new Card(id++, i, tableNode, this));
+        cards.push(new Card(id++, i, tableNode, this, cardType));
       }
     }
 
