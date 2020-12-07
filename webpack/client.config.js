@@ -4,12 +4,8 @@ const HTMLplugin = require('html-webpack-plugin');
 module.exports = {
     entry: './src/index.js',
     output: {
-        filename: 'bundle.js',
+        filename: 'client.js',
         path: path.resolve(__dirname, 'public')
-    },
-    devServer: {
-        port: 3000,
-        
     },
     plugins: [
         new HTMLplugin({
@@ -24,12 +20,8 @@ module.exports = {
             },
             {
                 test: /\.js$/i,
-                use: ['babel-loader'],
-                exclude: [
-                    path.resolve(__dirname, 'server'),
-                    path.resolve(__dirname, 'node_modules'),
-                ]
-            }
+                use: ["babel-loader"],
+            },
         ],
-      },
+    },
 }
