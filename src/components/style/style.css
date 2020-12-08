@@ -94,7 +94,6 @@ body, html {
     color: rgb(243, 157, 28);
 }
 
-
 .score-message_hide {
     top: -100%;
     opacity: 0;
@@ -184,5 +183,3 @@ body, html {
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
 }
-
-

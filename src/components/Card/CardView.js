@@ -1,4 +1,3 @@
-
 import { drawCardImage } from './DrawCardSide';
 
 export default class CardView {
@@ -45,6 +44,7 @@ export default class CardView {
         if (!this.hidden) {
             cardContainer.innerText = this.name;
         }
+
         this.container.appendChild(cardContainer);
         this.node = cardContainer;
     }

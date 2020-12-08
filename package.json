@@ -4,7 +4,7 @@
   "description": "something interesting",
   "main": " \t",
   "dependencies": {
-    "@webpack-cli/init": "^1.0.3"
+    "babel-loader": "^8.2.2"
   },
   "devDependencies": {
     "css-loader": "^5.0.1",

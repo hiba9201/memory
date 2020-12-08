@@ -22,6 +22,14 @@ module.exports = {
                 test: /\.css$/i,
                 use: ["style-loader", "css-loader"],
             },
+            {
+                test: /\.js$/i,
+                use: ['babel-loader'],
+                exclude: [
+                    path.resolve(__dirname, 'server'),
+                    path.resolve(__dirname, 'node_modules'),
+                ]
+            }
         ],
       },
 }

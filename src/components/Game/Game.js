@@ -1,5 +1,4 @@
 import { randomSortArray, getLimitedScoreCoef, getRandomCardType } from '../utils';
-
 import Card from "../Card/Card";
 import GameView from "./GameView";
 
@@ -31,7 +30,6 @@ export default class Game {
       cardType = getRandomCardType();
       for (let j = 1; j <= sameCardCount; j++) {
         cards.push(new Card(id++, i, tableNode, this, cardType));
-
       }
     }
 
@@ -44,6 +42,7 @@ export default class Game {
       setInterval(() => {
         const newScore = this.scoreCoef - 0.1;
         this.scoreCoef = getLimitedScoreCoef(newScore);
+
         this.view.updateScoreLine();
       }, this.scoreDownSpeed);
     }, 1000);

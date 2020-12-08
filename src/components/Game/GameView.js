@@ -62,7 +62,6 @@ export default class GameView {
         const message = document.createElement('div');
         message.classList.add('score-message');
 
-
         if (points > 0) {
             message.classList.add('score-message_color_success');
             message.textContent = '+' + points;
