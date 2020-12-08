@@ -1,7 +1,15 @@
-import { AnimalsSVGImagesOrder, AquaSVGImagesOrder, FruitsSVGImagesOrder, aquaBackgroundColors, fruitBackgroundColors, groundBackgroundColors, CardTypes } from './consts';
+import {
+    AnimalsSVGImagesOrder,
+    AquaSVGImagesOrder,
+    FruitsSVGImagesOrder,
+    aquaBackgroundColors,
+    fruitBackgroundColors,
+    groundBackgroundColors,
+    CardTypes
+} from './consts';
 
-export function randomSortArray(arr) { 
-    return arr.sort(() => Math.random() - 0.5); 
+export function randomSortArray(arr) {
+    return arr.sort(() => Math.random() - 0.5);
 }
 
 export function getLimitedScoreCoef(coef) {
@@ -11,12 +19,12 @@ export function getLimitedScoreCoef(coef) {
 }
 
 export function getRandomCardType() {
-    const randomCoef = +Math.random().toFixed(2);
+    const randomCoef = parseFloat(Math.random().toFixed(2));
 
     if (randomCoef <= 0.30) {
         return CardTypes.AQUA;
     } else if (randomCoef > 0.30 && randomCoef <= 0.60) {
-        return CardTypes.GROUND;
+        return CardTypes.ANIMALS;
     } else if (randomCoef > 0.60 && randomCoef <= 0.97) {
         return CardTypes.FRUITS;
     } else if (randomCoef > 0.97) {
@@ -24,27 +32,25 @@ export function getRandomCardType() {
     }
 }
 
-export function getBGColor (id, type) {
-    if (type === CardTypes.GROUND) {
-        return groundBackgroundColors[id % groundBackgroundColors.length];
-    } else if (type === CardTypes.AQUA) {
-        return aquaBackgroundColors[id % aquaBackgroundColors.length];
-    } else if (type === CardTypes.FRUITS) {
-        return fruitBackgroundColors[id % fruitBackgroundColors.length];
+export function getBGColor(id, type) {
+    switch (type) {
+        case CardTypes.ANIMALS:
+            return groundBackgroundColors[id % groundBackgroundColors.length];
+        case CardTypes.AQUA:
+            return aquaBackgroundColors[id % aquaBackgroundColors.length];
+        case CardTypes.FRUITS:
+            return fruitBackgroundColors[id % fruitBackgroundColors.length];
     }
 }
 
-export function getSVGImageURL (id, type) {
+export function getSVGImageURL(id, type) {
     const baseURL = '../static/icons/';
-
-    if (type === CardTypes.GROUND) {
-        const url =  baseURL + 'animals/' + AnimalsSVGImagesOrder[id] + '.svg';
-        return url;
-    } else if (type === CardTypes.AQUA) {
-        const url =  baseURL + 'aqua/' + AquaSVGImagesOrder[id] + '.svg';
-        return url;
-    } else if (type === CardTypes.FRUITS) {
-        const url =  baseURL + 'fruits/' + FruitsSVGImagesOrder[id] + '.svg';
-        return url;
+    switch (type) {
+        case CardTypes.ANIMALS:
+            return `${baseURL}animals/${AnimalsSVGImagesOrder[id]}.svg`;
+        case CardTypes.AQUA:
+            return `${baseURL}aqua/${AquaSVGImagesOrder[id]}.svg`;
+        case CardTypes.FRUITS:
+            return `${baseURL}fruits/${FruitsSVGImagesOrder[id]}.svg`;
     }
 }

@@ -43,7 +43,7 @@ export default class Game {
         const newScore = this.scoreCoef - 0.1;
 
         this.scoreCoef = getLimitedScoreCoef(newScore);
-        
+
         this.view.updateScoreLine();
       }, this.scoreDownSpeed);
     }, 1000);
