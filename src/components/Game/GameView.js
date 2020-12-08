@@ -62,11 +62,12 @@ export default class GameView {
         const message = document.createElement('div');
         message.classList.add('score-message');
 
-        if(points > 0) {
+
+        if (points > 0) {
             message.classList.add('score-message_color_success');
             message.textContent = '+' + points;
         }
-        else if(points === 0) {
+        else if (points === 0) {
             message.classList.add('score-message_color_neutral');
             message.textContent = points;
         }
@@ -78,7 +79,7 @@ export default class GameView {
         document.querySelector('.score-count__container').appendChild(message);
 
         setTimeout(()=> {
-            message.classList.add('score_message_hide');
+            message.classList.add('score-message_hide');
         }, 10);
 
         setTimeout(()=> {
