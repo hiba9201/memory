@@ -5,26 +5,28 @@ async function request(url, method, body) {
         const response = await fetch(`${apiUrl}${url}`, {
             method,
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
             },
             body: body && JSON.stringify(body),
         });
-    
-        return await response.json();
+
+        return response.json();
     } catch (e) {
+        e.message = `Request error on ${url} with method ${method}`;
         console.error(e);
+        return e;
     }
 }
 
 export async function getRequest(url, body) {
-    return await request(url, Methods.Get, body);
+    return request(url, Methods.Get, body);
 }
 
 export async function patchRequest(url, body) {
-    return await request(url, Methods.Patch, body);
+    return request(url, Methods.Patch, body);
 }
 
 export async function postRequest(url, body) {
-    return await request(url, Methods.Post, body);
+    return request(url, Methods.Post, body);
 }

@@ -1,20 +1,20 @@
 export default class GameView {
     constructor(context, gameSelector) {
         this.context = context;
-        this._playArea = document.querySelector(gameSelector);
+        this.playArea = document.querySelector(gameSelector);
         this.tableNode = this.renderTable();
     }
 
     renderTable() {
         const tableNode = document.createElement('div');
         tableNode.classList.add('table');
-        this._playArea.appendChild(tableNode);
+        this.playArea.appendChild(tableNode);
 
         return tableNode;
     }
 
-    renderCards(cards) {
-        cards.forEach(card => {
+    static renderCards(cards) {
+        cards.forEach((card) => {
             card.renderCard();
         });
     }
@@ -25,6 +25,7 @@ export default class GameView {
 
         const scoreCountContainer = document.createElement('div');
         scoreCountContainer.classList.add('score-count__container');
+        this.scoreCountContainer = scoreCountContainer;
 
         this.scoreCount = document.createElement('p');
         this.scoreCount.classList.add('score-count');
@@ -43,46 +44,44 @@ export default class GameView {
 
         const scoreBonusCoef = document.createElement('div');
         scoreBonusCoef.classList.add('score-bonus__coef');
-        scoreBonusCoef.textContent = `x${this.context.scoreCoef}`
+        scoreBonusCoef.textContent = `x${this.context.scoreCoef}`;
         scoreLine.appendChild(scoreBonusCoef);
 
-        this._playArea.appendChild(scoreNode);
+        this.playArea.appendChild(scoreNode);
     }
 
     updateScoreLine() {
         document.querySelector('.score-bonus').style.width = `${this.context.scoreCoef * 20}%`;
-        document.querySelector('.score-bonus__coef').textContent =  `x${this.context.scoreCoef}`;
+        document.querySelector('.score-bonus__coef').textContent = `x${this.context.scoreCoef}`;
     }
 
     updateScore() {
         this.scoreCount.textContent = this.context.score;
     }
 
-    updateScorePointMessage(points){
+    updateScorePointMessage(points) {
         const message = document.createElement('div');
         message.classList.add('score-message');
 
         if (points > 0) {
             message.classList.add('score-message_color_success');
-            message.textContent = '+' + points;
-        }
-        else if (points === 0) {
+            message.textContent = `+${points}`;
+        } else if (points === 0) {
             message.classList.add('score-message_color_neutral');
             message.textContent = points;
-        }
-        else {
+        } else {
             message.classList.add('score-message_color_fail');
             message.textContent = points;
         }
 
-        document.querySelector('.score-count__container').appendChild(message);
+        this.scoreCountContainer.appendChild(message);
 
-        setTimeout(()=> {
+        setTimeout(() => {
             message.classList.add('score-message_hide');
         }, 10);
 
-        setTimeout(()=> {
-            message.remove()
+        setTimeout(() => {
+            message.remove();
         }, 2000);
     }
 }

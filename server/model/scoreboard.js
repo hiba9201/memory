@@ -1,7 +1,9 @@
 const fs = require('fs');
 
 class Scoreboard {
-    static get scoreBoardPath() { return './static/scoreboard.json' };
+    static get scoreBoardPath() {
+        return './static/scoreboard.json';
+    }
 
     static readScoreBoardFromFile() {
         let score;
@@ -27,8 +29,8 @@ class Scoreboard {
     static updateScore(updateData) {
         const score = Scoreboard.readScoreBoardFromFile();
 
-        Object.entries(updateData).forEach(entry => {
-            const [ key, value ] = entry;
+        Object.entries(updateData).forEach((entry) => {
+            const [key, value] = entry;
             if (typeof key === 'string') {
                 score[key] = value;
             }

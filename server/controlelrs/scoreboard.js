@@ -1,4 +1,4 @@
-const Scoreboard = require("../model/scoreboard");
+const Scoreboard = require('../model/scoreboard');
 
 function getScoreBoard(req, res) {
     const score = Scoreboard.getScore();
