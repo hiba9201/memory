@@ -1,7 +1,7 @@
-import {getBGColor, getSVGImageURL} from '../utils';
-import {CardTypes} from '../consts';
+import { getBGColor, getSVGImageURL } from './utils';
+import { CardTypes } from '../consts';
 
-export const drawCardImage = (type, id) => {
+export default (type, id) => {
     const background = document.createElement('div');
     background.classList.add('card_sides-container');
 
@@ -28,7 +28,6 @@ export const drawCardImage = (type, id) => {
             const imageSVG = document.createElement('img');
             imageSVG.classList.add('image-svg');
 
-
             if (type === CardTypes.ANIMALS) {
                 background.style.backgroundColor = getBGColor(id, type);
                 imageSVG.src = getSVGImageURL(id, type);
@@ -45,4 +44,4 @@ export const drawCardImage = (type, id) => {
             return background;
         }
     }
-}
+};

@@ -1,7 +1,7 @@
-import { drawCardImage } from './DrawCardSide';
+import drawCardImage from './DrawCardSide';
 
 export default class CardView {
-    constructor(container, name, id, cardType, context) {
+    constructor(container, name, id, cardType) {
         this.hidden = true;
         this.color = '#ffffff';
         this.container = container;

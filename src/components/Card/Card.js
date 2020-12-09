@@ -1,4 +1,4 @@
-import CardView from "./CardView";
+import CardView from './CardView';
 
 export default class Card {
     constructor(id, num, container, context, cardType) {
