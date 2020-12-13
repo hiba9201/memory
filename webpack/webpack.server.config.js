@@ -3,12 +3,11 @@ const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
     target: 'node',
-    entry: './app.js',
+    entry: './server/app.js',
     output: {
         filename: 'server.js',
         path: path.resolve(__dirname, '../public'),
-        publicPath: '/',
-        libraryTarget: 'commonjs2'
+        libraryTarget: 'commonjs2',
     },
     externals: [nodeExternals()],
     module: {
@@ -16,15 +15,14 @@ module.exports = {
             {
                 test: /\.js$/i,
                 use: {
-                    loader: "babel-loader",
+                    loader: 'babel-loader',
                     options: {
-                        plugins: [
-                            [require('@babel/plugin-proposal-class-properties')],
-                        ],
-                        presets: ['@babel/preset-env']
-                    }
+                        plugins: ['@babel/plugin-proposal-class-properties'],
+                        presets: ['@babel/preset-env'],
+                    },
                 },
+                exclude: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'node_modules')],
             },
         ],
     },
-}
+};

@@ -11,10 +11,14 @@ async function request(url, method, body) {
             body: body && JSON.stringify(body),
         });
 
-        return response.json();
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.indexOf('application/json') !== -1) {
+            return response.json();
+        }
+        return response.text();
     } catch (e) {
         e.message = `Request error on ${url} with method ${method}`;
-        console.error(e);
+        console.error(e.message);
         return e;
     }
 }

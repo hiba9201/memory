@@ -3,10 +3,22 @@
   "version": "1.0.0",
   "description": "something interesting",
   "main": " \t",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "body-parser": "^1.19.0",
+    "webpack": "^5.4.0",
+    "webpack-dev-middleware": "^4.0.2",
+    "html-webpack-plugin": "^4.5.0",
+    "webpack-node-externals": "^2.5.2"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
+    "babel-preset-env": "^1.7.0",
     "css-loader": "^5.0.1",
     "eslint": "^7.15.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -15,17 +27,16 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.2.0",
     "eslint-plugin-react": "^7.21.5",
-    "html-webpack-plugin": "^4.5.0",
     "husky": "^4.3.5",
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
     "style-loader": "^2.0.0",
-    "webpack": "^5.4.0",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
     "start": "webpack serve --mode development",
+    "start:server": "node server/app.js",
     "build": "webpack --mode production",
     "lint": "eslint --debug src/ && eslint --debug server/",
     "lint:fix": "eslint --debug src/ --fix && eslint --debug src/ --fix",
@@ -41,8 +52,13 @@
     "url": "https://github.com/hiba9201/memory/issues"
   },
   "homepage": "https://github.com/hiba9201/memory#readme",
-  "lint-staged": {    
-    "*.(js)": ["npm run prettier", "npm run lint:fix", "git add"]
+  "lint-staged": {
+    "*.(js)": [
+      "npm run prettier",
+      "git add",
+      "npm run lint:fix",
+      "git add"
+    ]
   },
   "husky": {
     "hooks": {

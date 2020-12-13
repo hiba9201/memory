@@ -1,12 +1,24 @@
+import { patchRequest } from '../../api/api-utils';
+
 export default class GameView {
     constructor(context, gameSelector) {
         this.context = context;
         this.playArea = document.querySelector(gameSelector);
         this.tableNode = this.renderTable();
+        this.modal = document.querySelector('#modal');
+        this.modalBody = document.querySelector('#modalBody');
     }
 
     renderTable() {
-        const tableNode = document.createElement('div');
+        let tableNode = document.querySelector('.table');
+
+        if (tableNode) {
+            while (this.playArea.lastChild) {
+                this.playArea.removeChild(this.playArea.lastChild);
+            }
+        }
+
+        tableNode = document.createElement('div');
         tableNode.classList.add('table');
         this.playArea.appendChild(tableNode);
 
@@ -83,5 +95,51 @@ export default class GameView {
         setTimeout(() => {
             message.remove();
         }, 2000);
+    }
+
+    renderScoreForm() {
+        const formHeader = document.createElement('h3');
+        formHeader.classList.add('modal__form-header');
+        formHeader.innerText = 'сохранить результат';
+
+        const form = document.createElement('form');
+        form.classList.add('modal__form');
+
+        const nameInput = document.createElement('input');
+        nameInput.setAttribute('id', 'name');
+        nameInput.setAttribute('name', 'name');
+        nameInput.classList.add('modal__input');
+
+        const nameLabel = document.createElement('label');
+        nameLabel.setAttribute('for', 'name');
+        nameLabel.innerText = 'имя:';
+
+        const submitButton = document.createElement('button');
+        submitButton.setAttribute('type', 'submit');
+        submitButton.innerHTML = 'отправить';
+        submitButton.classList.add('modal__submit-button');
+
+        form.appendChild(nameLabel);
+        form.appendChild(nameInput);
+        form.appendChild(submitButton);
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const name = formData.get('name');
+            const body = { [name]: this.context.score };
+
+            await patchRequest('scoreboard', body);
+            this.modal.classList.add('modal_hidden');
+            this.modalBody.innerHTML = '';
+
+            this.context.scoreboard.render();
+        });
+
+        this.modalBody.appendChild(formHeader);
+        this.modalBody.appendChild(form);
+
+        this.modal.classList.remove('modal_hidden');
     }
 }
