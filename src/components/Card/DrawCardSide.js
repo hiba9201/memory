@@ -1,9 +1,13 @@
-import { getBGColor, getSVGImageURL } from './utils';
-import { CardTypes } from '../consts';
+import { getBGColor, getSVGImageURL, getRandomBackgroundType, drawBackground } from "./utils";
+import { CardTypes, BackgroundTypes, starColor } from '../consts';
 
 export default (type, id) => {
     const background = document.createElement('div');
     background.classList.add('card_sides-container');
+    const glassEffect = document.createElement('div');
+    glassEffect.classList.add('effect__glass');
+    background.appendChild(glassEffect);
+    const backgroundImage = drawBackground(id);
 
     switch (type) {
         case CardTypes.UKRAINE: {
@@ -29,7 +33,7 @@ export default (type, id) => {
             imageSVG.classList.add('image-svg');
 
             if (type === CardTypes.ANIMALS) {
-                background.style.backgroundColor = getBGColor(id, type);
+                background.appendChild(backgroundImage);
                 imageSVG.src = getSVGImageURL(id, type);
             } else if (type === CardTypes.AQUA) {
                 background.style.backgroundColor = getBGColor(id, type);

@@ -24,13 +24,12 @@ module.exports = {
         'function-paren-newline': 'off', // Несовместимо с prettier
         'no-plusplus': 'off',
         'space-before-function-paren': 0, // Несовместимо с prettier
-
+        'no-case-declarations': 'off',
+        'no-use-before-define': 'off',
         'max-len': ['error', 125, 2, { ignoreUrls: true }], // airbnb позволяет некоторые пограничные случаи
         'no-alert': 'error', // airbnb использует предупреждение
 
         'prefer-destructuring': 'off',
         indent: ['error', 4, { SwitchCase: 1 }],
-
-        'prettier/prettier': ['error'],
     },
 };

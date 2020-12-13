@@ -4,12 +4,12 @@
   "description": "something interesting",
   "main": " \t",
   "dependencies": {
-    "express": "^4.17.1",
-    "morgan": "^1.10.0",
     "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "html-webpack-plugin": "^4.5.0",
+    "morgan": "^1.10.0",
     "webpack": "^5.4.0",
     "webpack-dev-middleware": "^4.0.2",
-    "html-webpack-plugin": "^4.5.0",
     "webpack-node-externals": "^2.5.2"
   },
   "devDependencies": {
