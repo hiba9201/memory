@@ -10,14 +10,14 @@ export default class ScoreboardView {
 
     async render() {
         const scoreboardData = await getRequest('scoreboard');
-        const table = this.createTable(scoreboardData);
+        const table = ScoreboardView.createTable(scoreboardData);
 
         this.modalBody.appendChild(table);
 
         this.modal.classList.remove('modal_hidden');
     }
 
-    createTable(data) {
+    static createTable(data) {
         const table = document.createElement('table');
         const caption = document.createElement('caption');
         caption.innerText = 'лидерборд';
@@ -40,7 +40,7 @@ export default class ScoreboardView {
 
         const tableBody = document.createElement('tbody');
 
-        this.renderTableRows(data, tableBody);
+        ScoreboardView.renderTableRows(data, tableBody);
 
         table.appendChild(tableHead);
         table.appendChild(tableBody);
