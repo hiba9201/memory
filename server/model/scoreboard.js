@@ -1,8 +1,9 @@
 const fs = require('fs');
+const path = require('path');
 
 class Scoreboard {
     static get scoreBoardPath() {
-        return './static/scoreboard.json';
+        return path.join(__dirname, '../static/scoreboard.json');
     }
 
     static readScoreBoardFromFile() {

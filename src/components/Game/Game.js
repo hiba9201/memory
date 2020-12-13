@@ -6,13 +6,15 @@ import GameView from './GameView';
 import '../style/style.css';
 
 export default class Game {
-    constructor(selector, countCards, sameCardCount, scoreReduceSpeed, score) {
+    constructor(selector, countCards, sameCardCount, scoreReduceSpeed, score, scoreboard) {
         this.view = new GameView(this, selector);
         this.compareArray = [];
         this.score = score;
         this.scoreCoef = 1;
         this.setCards(countCards, sameCardCount);
         this.setScore(scoreReduceSpeed);
+        this.openCards = countCards;
+        this.scoreboard = scoreboard;
     }
 
     setScore(scoreReduceSpeed) {
@@ -40,7 +42,7 @@ export default class Game {
 
     startReduceScoreCoef() {
         setTimeout(() => {
-            setInterval(() => {
+            this.scoreReduceInterval = setInterval(() => {
                 const newScore = this.scoreCoef - 0.1;
                 this.scoreCoef = getLimitedScoreCoef(newScore);
 
@@ -57,6 +59,7 @@ export default class Game {
             changePoints = points * this.scoreCoef;
             this.scoreCoef++;
             this.score += changePoints;
+            this.openCards -= 2;
         } else {
             changePoints = -points / 10;
             const newScore = this.score + changePoints;
@@ -69,5 +72,15 @@ export default class Game {
 
         this.view.updateScorePointMessage(changePoints);
         this.view.updateScore();
+
+        if (this.openCards === 0) {
+            this.stopGame();
+        }
+    }
+
+    stopGame() {
+        clearInterval(this.scoreReduceInterval);
+
+        this.view.renderScoreForm();
     }
 }

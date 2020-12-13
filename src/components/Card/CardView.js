@@ -3,7 +3,6 @@ import drawCardImage from './DrawCardSide';
 export default class CardView {
     constructor(container, name, id, cardType) {
         this.hidden = true;
-        this.color = '#ffffff';
         this.container = container;
         this.name = name;
         this.node = null;
