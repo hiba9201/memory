@@ -218,6 +218,7 @@ const drawBuildings = (id) => {
             }
             setInterval(() => {
                 // eslint-disable-next-line eqeqeq
+                // только двойным, по другому никак
                 if (oneWindow.style.background == 'rgb(130, 113, 132)') {
                     oneWindow.style.background = '#c3bd14';
                 } else {
