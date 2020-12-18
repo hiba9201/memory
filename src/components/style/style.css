@@ -307,6 +307,52 @@ body, html {
     transform: translateY(-10px);
 }
 
+.bubble {
+    border-radius: 50%;
+    background: rgba(206,255,248,0.7385504543614321);
+    position: absolute;
+    animation-name: bubble-hoisting;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes bubble-hoisting {
+    0% {
+        transform: translate(-7px, 0px) scale(.9);
+    }
+    20% {
+        transform: translate(10px, -40px) scale(1.1);
+    }
+    40% {
+        transform: translate(5px, -75px) scale(.9);
+    }
+    60% {
+        transform: translate(-1px, -100px) scale(1);
+    }
+    80% {
+        transform: translate(8px, -140px) scale(.9);
+    }
+    90% {
+        transform: translate(7px, -169px) scale(.8);
+    }
+    100% {
+        transform: translate(10px, -190px) scale(.8);
+    }
+}
+
+.grass img {
+    width: 60px;
+    height: 60px;
+}
+
+.grass {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+
+
 .image-svg-сontainer {
     position: relative;
     width: 70%;

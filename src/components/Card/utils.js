@@ -26,6 +26,10 @@ export function getBGColor(id, type) {
              rgba(189,184,174,1) 11%, rgba(189,184,174,1) 30%, 
             rgba(35,203, ${Math.trunc(Math.random() * 50 + 200)} ,1) 33%`;
             return gradient;
+        case BackgroundTypes.OCEAN:
+            gradient = `linear-gradient(${Math.trunc(Math.random() * 360)}deg,
+            rgba(115,221,255,1) 0%, rgba(110,139,${Math.trunc(Math.random() * 100 + 155)},1) 100%)`;
+            return gradient;
         default:
             return 0;
     }
@@ -38,8 +42,10 @@ export function getSVGImageURL(id, type) {
             return `${baseURL}animals/${AnimalsSVGImagesOrder[id]}.svg`;
         case CardTypes.AQUA:
             return `${baseURL}aqua/${AquaSVGImagesOrder[id]}.svg`;
-        default:
+        case CardTypes.FRUITS:
             return `${baseURL}fruits/${FruitsSVGImagesOrder[id]}.svg`;
+        default:
+            return `${baseURL}grass/${id}.svg`;
     }
 }
 
@@ -68,16 +74,16 @@ export function getRandomCardType() {
 
 export function getRandomBackgroundType() {
     const randomCoef = getRandomCoef();
-    if (randomCoef < 0.33) {
+    if (randomCoef <= 0.25) {
         return BackgroundTypes.SPACE;
     }
-    if (randomCoef >= 0.33 && randomCoef < 0.65) {
+    if (randomCoef > 0.25 && randomCoef < 0.50) {
         return BackgroundTypes.PYRAMIDS;
     }
-    if (randomCoef < 0) {
+    if (randomCoef >= 0.50 && randomCoef < 0.75) {
         return BackgroundTypes.OCEAN;
     }
-    if (randomCoef >= 0.65 && randomCoef <= 1) {
+    if (randomCoef >= 0.75 && randomCoef <= 1) {
         return BackgroundTypes.CITY;
     }
     return 0;
@@ -119,6 +125,15 @@ export const drawBackground = (id) => {
             mountains.forEach(mountain => imageContainer.appendChild(mountain));
             const sun = drawSun(id);
             imageContainer.appendChild(sun);
+            return image;
+        case BackgroundTypes.OCEAN:
+            color = getBGColor(id, backgroundType);
+            imageContainer.classList.add('image-background__сontainer');
+            imageContainer.style.background = color;
+            const bubbles = drawBubles();
+            bubbles.forEach(bubble => imageContainer.appendChild(bubble));
+            const grass = drawGrass();
+            grass.forEach(oneGrass => imageContainer.appendChild(oneGrass));
             return image;
         default:
             break;
@@ -228,4 +243,37 @@ const drawTrees = () => {
     ${100 - Math.trunc(Math.random() * 20)}px)`;
     tree.appendChild(treeTrunk);
     return tree;
+};
+
+const drawBubles = () => {
+    const bubblesArray = [];
+    const bubblesCount = Math.trunc(Math.random() * 25 + 10);
+    for (let i = 0; i < bubblesCount; i++) {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        const size = `${Math.trunc(Math.random() * 10 + 5)}px`;
+        bubble.style.width = size;
+        bubble.style.height = size;
+        bubble.style.bottom = `-${Math.trunc(Math.random() * 50 + 10)}px`;
+        bubble.style.left = `${Math.trunc(Math.random() * 200)}px`;
+        bubble.style.animationDuration = `${Math.trunc(Math.random() * 10 + 7)}s`;
+        bubblesArray.push(bubble);
+    }
+    return bubblesArray;
+};
+
+const drawGrass = () => {
+    const grassArray = [];
+    const grassCount = Math.trunc(Math.random() * 10 + 4);
+    for (let i = 0; i < grassCount; i++) {
+        const grass = document.createElement('div');
+        grass.classList.add('grass');
+        grass.style.transform = `translate(${20 * i + Math.random() * 20}px, 70px)`;
+        const grassImgSrc = getSVGImageURL(Math.trunc(Math.random() * 4));
+        const imageSVG = document.createElement('img');
+        imageSVG.src = grassImgSrc;
+        grass.appendChild(imageSVG);
+        grassArray.push(grass);
+    }
+    return grassArray;
 };

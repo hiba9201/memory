@@ -27,7 +27,6 @@ export default (type, id) => {
             const imageSVGContainer = document.createElement('div');
             imageSVGContainer.classList.add('image-svg-сontainer');
             background.appendChild(imageSVGContainer);
-
             const imageSVG = document.createElement('img');
             imageSVG.classList.add('image-svg');
 
