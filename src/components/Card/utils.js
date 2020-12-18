@@ -6,30 +6,27 @@ import {
     FruitsSVGImagesOrder,
     spaceBackground,
     starColor,
-    mountainColors, buildingColors, treesColors,
-} from "../consts";
+    mountainColors,
+    buildingColors,
+    treesColors,
+} from '../consts';
 
 export function getBGColor(id, type) {
-    let gradient;
     switch (type) {
         case BackgroundTypes.PYRAMIDS:
-            gradient = `linear-gradient(180deg,
+            return `linear-gradient(180deg,
                 rgba(115,221,246,1) 65%, rgba(${Math.trunc(Math.random() * 170)},196,119,1) 66%)`;
-            return gradient;
         case BackgroundTypes.SPACE:
-            gradient = `linear-gradient(${Math.trunc(Math.random() * 360)}deg,
+            return `linear-gradient(${Math.trunc(Math.random() * 360)}deg,
                 ${spaceBackground[id % spaceBackground.length]} ${Math.trunc(Math.random() * 50)}%,
                 rgb(22,31,52) ${Math.trunc(Math.random() * 50 + 49)}%)`;
-            return gradient;
         case BackgroundTypes.CITY:
-            gradient = `linear-gradient(0deg, rgba(63,188,96,1) 10%,
-             rgba(189,184,174,1) 11%, rgba(189,184,174,1) 30%, 
-            rgba(35,203, ${Math.trunc(Math.random() * 50 + 200)} ,1) 33%`;
-            return gradient;
+            return `linear-gradient(0deg, rgba(63,188,96,1) 10%,
+                rgba(189,184,174,1) 11%, rgba(189,184,174,1) 30%, 
+                rgba(35,203, ${Math.trunc(Math.random() * 50 + 200)} ,1) 33%`;
         case BackgroundTypes.OCEAN:
-            gradient = `linear-gradient(${Math.trunc(Math.random() * 360)}deg,
+            return `linear-gradient(${Math.trunc(Math.random() * 360)}deg,
             rgba(115,221,255,1) 0%, rgba(110,139,${Math.trunc(Math.random() * 100 + 155)},1) 100%)`;
-            return gradient;
         default:
             return 0;
     }
@@ -138,6 +135,7 @@ export const drawBackground = (id) => {
         default:
             break;
     }
+
     return 1;
 };
 
@@ -155,6 +153,7 @@ const drawStars = (id) => {
         star.innerHTML = '&#9733';
         starArray.push(star);
     }
+
     return starArray;
 };
 
@@ -167,6 +166,7 @@ const drawPlanet = () => {
     planet.style.height = size;
     planet.style.transform = `translate(${Math.trunc(Math.random() * 200 - 20)}px, -${Math.trunc(Math.random() * 150)}px) 
     rotate(${Math.random() * 360}deg`;
+
     return planet;
 };
 
@@ -183,6 +183,7 @@ const drawMountains = (id) => {
         mountain.style.transform = `translate(${200 / (i + 1) - 150}px, ${Math.trunc(Math.random() * 70 + 25)}px)`;
         mountainsArray.push(mountain);
     }
+
     return mountainsArray;
 };
 
@@ -193,6 +194,7 @@ const drawSun = (id) => {
     const size = `${Math.trunc(Math.random() * 20 + 15)}px`;
     sun.style.width = size;
     sun.style.height = size;
+
     return sun;
 };
 
@@ -239,14 +241,14 @@ const drawTrees = () => {
     tree.classList.add('tree');
 
     const treeLeaf = document.createElement('div');
-    treeLeaf.classList.add('treeLeaf');
+    treeLeaf.classList.add('tree_leaf');
     treeLeaf.style.background = treesColors[Math.trunc(Math.random() * 4)];
     const size = `${Math.trunc(Math.random() * 20 + 30)}px`;
     treeLeaf.style.height = size;
     treeLeaf.style.width = size;
     tree.appendChild(treeLeaf);
     const treeTrunk = document.createElement('div');
-    treeTrunk.classList.add('treeTrunk');
+    treeTrunk.classList.add('tree_trunk');
     tree.style.transform = `translate(${50 + Math.trunc(Math.random() * 100)}px,
     ${100 - Math.trunc(Math.random() * 20)}px)`;
     tree.appendChild(treeTrunk);
