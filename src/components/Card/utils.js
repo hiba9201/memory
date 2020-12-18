@@ -143,7 +143,7 @@ export const drawBackground = (id) => {
 
 const drawStars = (id) => {
     const starArray = [];
-    const starCount = Math.trunc(Math.random() * 100 + 40);
+    const starCount = Math.trunc(Math.random() * 40 + 30);
     for (let i = 0; i < starCount; i++) {
         const star = document.createElement('div');
         star.style.fontSize = `${Math.trunc(Math.random() * 14 + 1)}px`;
@@ -214,9 +214,16 @@ const drawBuildings = (id) => {
             if (Math.random() > 0.5) {
                 oneWindow.style.background = '#827184';
             } else {
-                // oneWindow.style.background = starColor[(id + i) % starColor.length];
                 oneWindow.style.background = '#c3bd14';
             }
+            setInterval(() => {
+                // eslint-disable-next-line eqeqeq
+                if (oneWindow.style.background == 'rgb(130, 113, 132)') {
+                    oneWindow.style.background = '#c3bd14';
+                } else {
+                    oneWindow.style.background = '#827184';
+                }
+            }, Math.random() * 20000 + 5000);
             building.appendChild(oneWindow);
         }
         building.style.transform = `translate(${200 / (i + 1) - 50}px,
