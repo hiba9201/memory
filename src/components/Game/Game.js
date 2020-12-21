@@ -26,7 +26,6 @@ export default class Game {
     setCards(count, sameCardCount) {
         const cards = [];
         const { tableNode } = this.view;
-
         let id = 1;
         let cardType;
         for (let i = 1; i <= count / sameCardCount; i++) {
@@ -35,7 +34,6 @@ export default class Game {
                 cards.push(new Card(id++, i, tableNode, this, cardType));
             }
         }
-
         randomSortArray(cards);
         GameView.renderCards(cards);
     }

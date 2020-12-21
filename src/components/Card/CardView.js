@@ -8,7 +8,13 @@ export default class CardView {
         this.node = null;
         this.id = id;
         this.type = cardType;
-        this.image = drawCardImage(cardType, name);
+        if (window.view) {
+            this.image = window.view;
+            window.view = undefined;
+        } else {
+            this.image = drawCardImage(cardType, name);
+            window.view = this.image.cloneNode(true);
+        }
         this.onClick = () => this.flipCard();
     }
 
