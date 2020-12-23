@@ -1,11 +1,11 @@
 import CardView from './CardView';
 
 export default class Card {
-    constructor(id, num, container, context, cardType) {
+    constructor(id, num, container, context, cardType, cardCount) {
         this.type = cardType;
         this.num = num;
         this.game = context;
-        this.view = new CardView(container, num, id, cardType);
+        this.view = new CardView(container, num, id, cardType, cardCount);
     }
 
     compareCards(other) {

@@ -7,8 +7,9 @@ import '../style/style.css';
 
 export default class Game {
     constructor(selector, countCards, sameCardCount, scoreReduceSpeed, score, scoreboard) {
-        this.view = new GameView(this, selector);
+        this.view = new GameView(this, selector, countCards);
         this.compareArray = [];
+        this.countCards = countCards;
         this.score = score;
         this.scoreCoef = 1;
         this.setCards(countCards, sameCardCount);
@@ -31,7 +32,7 @@ export default class Game {
         for (let i = 1; i <= count / sameCardCount; i++) {
             cardType = getRandomCardType();
             for (let j = 1; j <= sameCardCount; j++) {
-                cards.push(new Card(id++, i, tableNode, this, cardType));
+                cards.push(new Card(id++, i, tableNode, this, cardType, this.countCards));
             }
         }
         randomSortArray(cards);
