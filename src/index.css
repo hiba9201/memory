@@ -4,7 +4,7 @@ body {
 }
 
 .wrapper {
-    padding-top: 90px;
+    padding-top: 70px !important;
 }
 
 .header {
@@ -17,7 +17,7 @@ body {
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
-    height: 80px;
+    height: 60px;
     align-items: center;
 }
 
@@ -31,7 +31,6 @@ body {
     flex-direction: row;
     justify-content: flex-end;
     align-items: flex-end;
-    height: 40px;
     margin: 0;
 }
 
@@ -109,4 +108,61 @@ body {
 
 .modal__submit-button:hover {
     opacity: .8;
+}
+
+.choise-level__modal__description {
+    text-align: center;
+    color: #474747;
+}
+
+.choise-level__buttons__container {
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.choise-level__button__type-veryease {
+    background-color: #57e4a9;
+}
+
+.choise-level__button__type-ease {
+    background-color: #34d928;
+}
+
+.choise-level__button__type-normal {
+    background-color: #3493d0;
+}
+
+.choise-level__button__type-hard {
+    background-color: #f8482f;
+}
+
+.choise-level__button__type-veryhard {
+    background-color: #e20101;
+}
+
+.choise-level__button {
+    position: relative;
+    padding: 10px;
+    outline: none;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 5px;
+    margin: 5px auto;
+    transition: all .9s ease-in;
+}
+
+.choise-level__button:hover::after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    transition: all .9s ease-in;
+    background-color: rgba(30, 30, 30 ,0.05);
 }

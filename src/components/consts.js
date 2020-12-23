@@ -1,5 +1,50 @@
 import { randomSortArray } from './utils';
 
+export const gameMods = [
+    {
+        modeEng: 'veryease',
+        mode: 'Легчайший',
+        cardCount: 20,
+        gameSpeed: 1.1,
+        gameSpeedDescription: 'медленная',
+    },
+    {
+        modeEng: 'ease',
+        mode: 'Легкий',
+        cardCount: 24,
+        gameSpeed: 1.1,
+        gameSpeedDescription: 'медленная',
+    },
+    {
+        modeEng: 'normal',
+        mode: 'Средний',
+        cardCount: 32,
+        gameSpeed: 1.1,
+        gameSpeedDescription: 'средняя',
+    },
+    {
+        modeEng: 'hard',
+        mode: 'Сложный',
+        cardCount: 40,
+        gameSpeed: 1.1,
+        gameSpeedDescription: 'быстрая',
+    },
+    {
+        modeEng: 'veryhard',
+        mode: 'Чел, ты...',
+        cardCount: 48,
+        gameSpeed: 1.1,
+        gameSpeedDescription: 'быстрая',
+    },];
+
+export const cardSize = {
+    XS: 32,
+    M: 24,
+    XL: 20,
+    NANO: 40,
+    AHAHHAHAHA: 48,
+};
+
 export const CardTypes = {
     AQUA: 'AQUA',
     ANIMALS: 'ANIMALS',

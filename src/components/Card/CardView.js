@@ -1,7 +1,7 @@
 import drawCardImage from './DrawCardSide';
 
 export default class CardView {
-    constructor(container, name, id, cardType) {
+    constructor(container, name, id, cardType, cardCount) {
         this.hidden = true;
         this.container = container;
         this.name = name;
@@ -15,6 +15,7 @@ export default class CardView {
             this.image = drawCardImage(cardType, name);
             window.view = this.image.cloneNode(true);
         }
+        this.cardCount = cardCount;
         this.onClick = () => this.flipCard();
     }
 
@@ -42,6 +43,11 @@ export default class CardView {
     render() {
         const cardContainer = document.createElement('div');
         cardContainer.classList.add('card');
+        if (this.cardCount > 24) {
+            cardContainer.classList.add('card-height-small');
+        } else {
+            cardContainer.classList.add('card-height-big');
+        }
         cardContainer.classList.add(this.hidden ? 'hidden' : 'open');
         cardContainer.id = this.id;
         cardContainer.addEventListener('click', () => this.onClick());

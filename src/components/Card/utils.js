@@ -34,15 +34,16 @@ export function getBGColor(id, type) {
 
 export function getSVGImageURL(id, type) {
     const baseURL = 'src/components/icons/';
+    const order = Math.floor(id % 12);
     switch (type) {
         case CardTypes.ANIMALS:
-            return `${baseURL}animals/${AnimalsSVGImagesOrder[id]}.svg`;
+            return `${baseURL}animals/${AnimalsSVGImagesOrder[order]}.svg`;
         case CardTypes.AQUA:
-            return `${baseURL}aqua/${AquaSVGImagesOrder[id]}.svg`;
+            return `${baseURL}aqua/${AquaSVGImagesOrder[order]}.svg`;
         case CardTypes.FRUITS:
-            return `${baseURL}fruits/${FruitsSVGImagesOrder[id]}.svg`;
+            return `${baseURL}fruits/${FruitsSVGImagesOrder[order]}.svg`;
         default:
-            return `${baseURL}grass/${id}.svg`;
+            return `${baseURL}grass/${order % 5}.svg`;
     }
 }
 

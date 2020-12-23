@@ -1,15 +1,16 @@
 import { patchRequest } from '../../api/api-utils';
+import { cardSize } from '../consts';
 
 export default class GameView {
-    constructor(context, gameSelector) {
+    constructor(context, gameSelector, countCards) {
         this.context = context;
         this.playArea = document.querySelector(gameSelector);
-        this.tableNode = this.renderTable();
+        this.tableNode = this.renderTable(countCards);
         this.modal = document.querySelector('#modal');
         this.modalBody = document.querySelector('#modalBody');
     }
 
-    renderTable() {
+    renderTable(countCards) {
         let tableNode = document.querySelector('.table');
 
         if (tableNode) {
@@ -20,6 +21,22 @@ export default class GameView {
 
         tableNode = document.createElement('div');
         tableNode.classList.add('table');
+        switch (countCards) {
+            case cardSize.XL:
+                tableNode.classList.add('card-size-xl');
+                break;
+            case cardSize.M:
+                tableNode.classList.add('card-size-m');
+                break;
+            case cardSize.XS:
+                tableNode.classList.add('card-size-xs');
+                break;
+            case cardSize.NANO:
+                tableNode.classList.add('card-size-nano');
+                break;
+            default:
+                tableNode.classList.add('card-size-nano');
+        }
         this.playArea.appendChild(tableNode);
 
         return tableNode;
