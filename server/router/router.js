@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { getScoreBoard, updateScoreBoard } = require('../controlelrs/scoreboard');
+const { getScoreBoard, updateScoreBoard } = require('../controllers/scoreboard');
 
 const router = express.Router();
 

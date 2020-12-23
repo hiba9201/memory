@@ -8,6 +8,7 @@ export default class GameView {
         this.tableNode = this.renderTable(countCards);
         this.modal = document.querySelector('#modal');
         this.modalBody = document.querySelector('#modalBody');
+        this.loader = document.querySelector('#loader');
     }
 
     renderTable(countCards) {
@@ -143,6 +144,7 @@ export default class GameView {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            this.loader.classList.remove('loader_hidden');
             const formData = new FormData(form);
             const name = formData.get('name');
             const body = { [name]: this.context.score };
@@ -152,6 +154,7 @@ export default class GameView {
             this.modalBody.innerHTML = '';
 
             this.context.scoreboard.render();
+            this.loader.classList.add('loader_hidden');
         });
 
         this.modalBody.appendChild(formHeader);

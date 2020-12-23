@@ -6,10 +6,16 @@ export default class ScoreboardView {
     constructor(modal, modalBody) {
         this.modal = modal;
         this.modalBody = modalBody;
+        this.loader = document.querySelector('#loader');
     }
 
     async render() {
+        const { loader } = this;
+
+        loader.classList.remove('loader_hidden');
         const scoreboardData = await getRequest('scoreboard');
+        loader.classList.add('loader_hidden');
+
         const table = ScoreboardView.createTable(scoreboardData);
 
         this.modalBody.appendChild(table);
@@ -38,12 +44,20 @@ export default class ScoreboardView {
         tableHeadRow.appendChild(tableHeadScore);
         tableHead.appendChild(tableHeadRow);
 
-        const tableBody = document.createElement('tbody');
+        const tableBodyColumns = document.createElement('td');
+        tableBodyColumns.setAttribute('colspan', '2');
+
+        const scrollContainer = document.createElement('div');
+        scrollContainer.classList.add('table__scroll-container');
+
+        const tableBody = document.createElement('table');
 
         ScoreboardView.renderTableRows(data, tableBody);
+        scrollContainer.appendChild(tableBody);
+        tableBodyColumns.appendChild(scrollContainer);
 
         table.appendChild(tableHead);
-        table.appendChild(tableBody);
+        table.appendChild(tableBodyColumns);
 
         return table;
     }
