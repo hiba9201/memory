@@ -1,9 +1,10 @@
 import { randomSortArray, getLimitedScoreCoef } from '../utils';
 import { getRandomCardType } from '../Card/utils';
+import { bonuses } from '../consts';
 import Card from '../Card/Card';
 import GameView from './GameView';
-
 import '../style/style.css';
+
 
 export default class Game {
     constructor(selector, countCards, sameCardCount, scoreReduceSpeed, score, scoreboard) {
@@ -59,10 +60,10 @@ export default class Game {
             changePoints = points * this.scoreCoef;
             if (typesArray[typesArray.length - 1] === typesArray[typesArray.length - 2]) {
                 if (typesArray[typesArray.length - 2] === typesArray[typesArray.length - 3]) {
-                    changePoints *= 2;
-                    this.scoreCoef = 5;
+                    changePoints *= bonuses.tripple;
+                    this.scoreCoef = bonuses.maxScoreBarValue;
                 }
-                changePoints *= 1.5;
+                changePoints *= bonuses.double;
                 this.scoreCoef++;
             }
             this.scoreCoef++;
