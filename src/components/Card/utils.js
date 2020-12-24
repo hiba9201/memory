@@ -43,7 +43,7 @@ export function getSVGImageURL(id, type) {
         case CardTypes.FRUITS:
             return `${baseURL}fruits/${FruitsSVGImagesOrder[order]}.svg`;
         default:
-            return `${baseURL}grass/${order % 5}.svg`;
+            return `${baseURL}grass/${id}.svg`;
     }
 }
 
@@ -87,7 +87,7 @@ export function getRandomBackgroundType() {
     return 0;
 }
 
-export const drawBackground = (id) => {
+export const drawBackground = (id, count) => {
     const backgroundType = getRandomBackgroundType();
     const image = document.createElement('div');
     const imageContainer = document.createElement('div');
@@ -99,7 +99,7 @@ export const drawBackground = (id) => {
             color = getBGColor(id, backgroundType);
             imageContainer.classList.add('image-background__сontainer-roll');
             imageContainer.style.background = color;
-            const stars = drawStars(id);
+            const stars = drawStars(id, count);
             stars.forEach(star => imageContainer.appendChild(star));
             const planet = drawPlanet(id);
             image.appendChild(planet);
@@ -130,7 +130,7 @@ export const drawBackground = (id) => {
             imageContainer.style.background = color;
             const bubbles = drawBubles();
             bubbles.forEach(bubble => imageContainer.appendChild(bubble));
-            const grass = drawGrass();
+            const grass = drawGrass(count);
             grass.forEach(oneGrass => imageContainer.appendChild(oneGrass));
             return image;
         default:
@@ -140,15 +140,19 @@ export const drawBackground = (id) => {
     return 1;
 };
 
-const drawStars = (id) => {
+const drawStars = (id, count) => {
     const starArray = [];
     const starCount = Math.trunc(Math.random() * 40 + 30);
     for (let i = 0; i < starCount; i++) {
         const star = document.createElement('div');
-        star.style.fontSize = `${Math.trunc(Math.random() * 14 + 1)}px`;
+        if (count > 24) {
+            star.style.fontSize = `${Math.trunc(Math.random() * 10 + 2)}px`;
+        } else {
+            star.style.fontSize = `${Math.trunc(Math.random() * 14 + 2)}px`;
+        }
         star.style.color = starColor[(id + i) % starColor.length];
         star.style.position = 'absolute';
-        star.style.transform = `translate(${Math.random() * 250 + 50}px, 
+        star.style.transform = `translate(${Math.random() * 200 + 50}px,
             ${Math.random() * 140 - 50}px) rotate(${Math.random() * 360}deg)`;
         star.style.zIndex = `${i + 10}`;
         star.innerHTML = '&#9733';
@@ -258,7 +262,7 @@ const drawTrees = () => {
 
 const drawBubles = () => {
     const bubblesArray = [];
-    const bubblesCount = Math.trunc(Math.random() * 25 + 10);
+    const bubblesCount = Math.trunc(Math.random() * 20 + 10);
     for (let i = 0; i < bubblesCount; i++) {
         const bubble = document.createElement('div');
         bubble.classList.add('bubble');
@@ -273,16 +277,23 @@ const drawBubles = () => {
     return bubblesArray;
 };
 
-const drawGrass = () => {
+const drawGrass = (count) => {
     const grassArray = [];
-    const grassCount = Math.trunc(Math.random() * 10 + 4);
+    const grassCount = Math.trunc(Math.random() * 5 + 6);
     for (let i = 0; i < grassCount; i++) {
         const grass = document.createElement('div');
         grass.classList.add('grass');
-        grass.style.transform = `translate(${20 * i + Math.random() * 20}px, 70px)`;
         const grassImgSrc = getSVGImageURL(Math.trunc(Math.random() * 4));
         const imageSVG = document.createElement('img');
         imageSVG.src = grassImgSrc;
+        if (count > 24) {
+            imageSVG.style.width = '40px';
+            imageSVG.style.height = '40px';
+            grass.style.left = `${20 * i + Math.random() * 20}px`;
+            grass.style.bottom = '-10px';
+        } else {
+            grass.style.transform = `translate(${20 * i + Math.random() * 20}px, 70px)`;
+        }
         grass.appendChild(imageSVG);
         grassArray.push(grass);
     }

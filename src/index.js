@@ -56,7 +56,7 @@ function createChooseLevelModal(board) {
                 clearInterval(game.scoreReduceInterval);
             }
 
-            game = new Game('#playArea', mode.cardCount, 2, 2000, 0, board);
+            game = new Game('#playArea', mode.cardCount, mode.sameCards, mode.gameSpeed, 0, board);
             modal.classList.add('modal_hidden');
             modalBody.innerHTML = '';
         });

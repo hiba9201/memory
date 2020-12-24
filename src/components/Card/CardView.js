@@ -12,7 +12,7 @@ export default class CardView {
             this.image = window.view;
             window.view = undefined;
         } else {
-            this.image = drawCardImage(cardType, name);
+            this.image = drawCardImage(cardType, name, cardCount);
             window.view = this.image.cloneNode(true);
         }
         this.cardCount = cardCount;
