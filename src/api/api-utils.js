@@ -18,7 +18,7 @@ async function request(url, method, body) {
         return response.text();
     } catch (e) {
         e.message = `Request error on ${url} with method ${method}`;
-        console.error(e.message);
+        console.error(e.message, e);
         return e;
     }
 }

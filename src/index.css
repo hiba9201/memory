@@ -104,6 +104,7 @@ body {
     height: 30px;
     width: 120px;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .modal__submit-button:hover {
@@ -153,6 +154,7 @@ body {
     border-radius: 5px;
     margin: 5px auto;
     transition: all .9s ease-in;
+    cursor: pointer;
 }
 
 .choise-level__button:hover::after {
@@ -164,5 +166,46 @@ body {
     right: 0;
     left: 0;
     transition: all .9s ease-in;
-    background-color: rgba(30, 30, 30 ,0.05);
+    background-color: rgba(30, 30, 30, 0.05);
+}
+
+.loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .7);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.loader_hidden {
+    display: none;
+}
+
+.loader__spinner {
+    width: 50px;
+    height: 50px;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 50%;
+    border-bottom-color: #57e4a9;
+    border-top-color: mediumturquoise;
+    border-right-color: mediumaquamarine;
+    border-left-color: mediumseagreen;
+    animation: spin 1s infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotateZ(0);
+        animation-timing-function: ease-out;
+    }
+    to {
+        transform: rotateZ(360deg);
+        animation-timing-function: ease-in;
+    }
 }

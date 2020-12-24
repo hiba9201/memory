@@ -13,6 +13,12 @@ caption {
     margin-left: 2px;
 }
 
+.table__scroll-container {
+    max-height: 40vh;
+    overflow-y: auto;
+    width: 100%;
+}
+
 th, td {
     font-size: 16px;
 }
@@ -21,4 +27,9 @@ th {
     height: 35px;
     vertical-align: top;
     font-weight: bold;
+}
+
+td:last-child,
+th:last-child {
+    text-align: right;
 }

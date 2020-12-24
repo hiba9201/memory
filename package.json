@@ -5,9 +5,12 @@
   "main": " \t",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "core-js": "^3.8.1",
     "express": "^4.17.1",
     "html-webpack-plugin": "^4.5.0",
     "morgan": "^1.10.0",
+    "redis": "^3.0.2",
+    "regenerator-runtime": "^0.13.7",
     "webpack": "^5.4.0",
     "webpack-dev-middleware": "^4.0.2",
     "webpack-node-externals": "^2.5.2"
