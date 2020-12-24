@@ -1,13 +1,13 @@
 import { getSVGImageURL, drawBackground } from './utils';
 import { CardTypes } from '../consts';
 
-export default (type, id) => {
+export default (type, id, count) => {
     const background = document.createElement('div');
     background.classList.add('card_sides_container');
     const glassEffect = document.createElement('div');
     glassEffect.classList.add('card_effect_glass');
     background.appendChild(glassEffect);
-    const backgroundImage = drawBackground(id);
+    const backgroundImage = drawBackground(id, count);
     switch (type) {
         case CardTypes.UKRAINE: {
             const topSide = document.createElement('div');
