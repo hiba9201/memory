@@ -1,18 +1,29 @@
+require('core-js/stable');
+require('regenerator-runtime/runtime');
+
 const express = require('express');
 const morgan = require('morgan');
 const parser = require('body-parser');
 const webpack = require('webpack');
+const path = require('path');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 
-const config = require('../webpack/webpack.server.config');
+let config;
+if (process.env.NODE_ENV !== 'production') {
+    // eslint-disable-next-line
+    config = require('../webpack/webpack.server.config');
+}
 
 const router = require('./router/router');
 
 const app = express();
-const port = 8080;
-const compiler = webpack(config);
+const port = process.env.PORT;
 
-app.use(webpackDevMiddleware(compiler));
+if (process.env.NODE_ENV !== 'production') {
+    const compiler = webpack(config);
+    app.use(webpackDevMiddleware(compiler));
+}
+app.use(express.static(path.join(__dirname, '/')));
 app.use(parser.json());
 app.use(morgan('combined'));
 

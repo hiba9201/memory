@@ -12,15 +12,19 @@ export default class ScoreboardView {
     async render() {
         const { loader } = this;
 
-        loader.classList.remove('loader_hidden');
+        if (loader.classList.contains('loader_hidden')) {
+            loader.classList.remove('loader_hidden');
+        }
         const scoreboardData = await getRequest('scoreboard');
-        loader.classList.add('loader_hidden');
 
-        const table = ScoreboardView.createTable(scoreboardData);
+        const scoreboardArray = Object.entries(scoreboardData || {});
+        scoreboardArray.sort((a, b) => b[1] - a[1]);
+        const table = ScoreboardView.createTable(scoreboardArray);
 
         this.modalBody.appendChild(table);
 
         this.modal.classList.remove('modal_hidden');
+        loader.classList.add('loader_hidden');
     }
 
     static createTable(data) {
@@ -63,15 +67,14 @@ export default class ScoreboardView {
     }
 
     static renderTableRows(data, body) {
-        const dataKeys = Object.keys(data);
-        dataKeys.forEach((name) => {
+        data.forEach((pair) => {
             const rowTag = document.createElement('tr');
             const nameTag = document.createElement('td');
-            nameTag.innerText = name;
+            nameTag.innerText = pair[0];
             rowTag.appendChild(nameTag);
 
             const propTag = document.createElement('td');
-            propTag.innerText = data[name];
+            propTag.innerText = pair[1];
             rowTag.appendChild(propTag);
 
             body.appendChild(rowTag);

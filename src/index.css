@@ -154,6 +154,7 @@ body {
     border-radius: 5px;
     margin: 5px auto;
     transition: all .9s ease-in;
+    cursor: pointer;
 }
 
 .choise-level__button:hover::after {
@@ -165,7 +166,8 @@ body {
     right: 0;
     left: 0;
     transition: all .9s ease-in;
-    background-color: rgba(30, 30, 30 ,0.05);
+    background-color: rgba(30, 30, 30, 0.05);
+}
 
 .loader {
     position: absolute;

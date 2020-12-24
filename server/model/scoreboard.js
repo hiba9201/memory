@@ -1,43 +1,37 @@
-const fs = require('fs');
-const path = require('path');
+const redis = require('redis');
+const { promisify } = require('util');
+
+const client = redis.createClient({
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    password: process.env.REDIS_PASS,
+});
+
+const getAsync = promisify(client.get).bind(client);
+const keysAsync = promisify(client.keys).bind(client);
+const setAsync = promisify(client.set).bind(client);
 
 class Scoreboard {
-    static get scoreBoardPath() {
-        return path.join(__dirname, '../static/scoreboard.json');
-    }
+    static async getScore() {
+        const keys = await keysAsync('*');
+        const data = {};
 
-    static readScoreBoardFromFile() {
-        let score;
-        try {
-            const file = fs.readFileSync(Scoreboard.scoreBoardPath);
-            score = JSON.parse(file.toString());
-        } catch (e) {
-            score = {};
-            fs.writeFileSync(Scoreboard.scoreBoardPath, '{}');
-        }
+        await Promise.all(
+            keys.map(async (key) => {
+                data[key] = parseInt(await getAsync(key), 10);
+            }),
+        );
 
-        return score;
-    }
-
-    static writeScoreBoardToFile(data) {
-        fs.writeFileSync(Scoreboard.scoreBoardPath, JSON.stringify(data));
-    }
-
-    static getScore() {
-        return Scoreboard.readScoreBoardFromFile();
+        return data;
     }
 
     static updateScore(updateData) {
-        const score = Scoreboard.readScoreBoardFromFile();
-
-        Object.entries(updateData).forEach((entry) => {
+        Object.entries(updateData).forEach(async (entry) => {
             const [key, value] = entry;
             if (typeof key === 'string') {
-                score[key] = value;
+                await setAsync(key, value);
             }
         });
-
-        this.writeScoreBoardToFile(score);
     }
 }
 

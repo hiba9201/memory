@@ -154,7 +154,6 @@ export default class GameView {
             this.modalBody.innerHTML = '';
 
             this.context.scoreboard.render();
-            this.loader.classList.add('loader_hidden');
         });
 
         this.modalBody.appendChild(formHeader);
