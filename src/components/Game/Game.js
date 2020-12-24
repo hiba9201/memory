@@ -57,9 +57,7 @@ export default class Game {
 
         if (isGuessedPair) {
             changePoints = points * this.scoreCoef;
-            console.log(typesArray);
             if (typesArray[typesArray.length - 1] === typesArray[typesArray.length - 2]) {
-                console.log('работает');
                 if (typesArray[typesArray.length - 2] === typesArray[typesArray.length - 3]) {
                     changePoints *= 2;
                     this.scoreCoef = 5;
