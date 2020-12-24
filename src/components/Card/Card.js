@@ -18,16 +18,16 @@ export default class Card {
     }
 
     onCardClick() {
-        const { compareArray } = this.game;
+        const { compareArray, guessedCardTypesArray } = this.game;
         const { view } = this;
 
         if (view.hidden && compareArray.length === 0) {
             compareArray.push(this);
         } else if (view.hidden && compareArray.length === 1) {
             const otherCard = compareArray.pop();
-
             if (this.compareCards(otherCard)) {
-                this.game.updateScorePoints(true);
+                guessedCardTypesArray.push(this.type);
+                this.game.updateScorePoints(true, guessedCardTypesArray);
             } else {
                 this.game.updateScorePoints(false);
                 setTimeout(() => {

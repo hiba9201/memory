@@ -15,6 +15,7 @@ export default class Game {
         this.setCards(countCards, sameCardCount);
         this.setScore(scoreReduceSpeed);
         this.openCards = countCards;
+        this.guessedCardTypesArray = [];
         this.scoreboard = scoreboard;
     }
 
@@ -50,12 +51,22 @@ export default class Game {
         }, 1000);
     }
 
-    updateScorePoints(isGuessedPair) {
+    updateScorePoints(isGuessedPair, typesArray) {
         let changePoints;
         const points = 10000;
 
         if (isGuessedPair) {
             changePoints = points * this.scoreCoef;
+            console.log(typesArray);
+            if (typesArray[typesArray.length - 1] === typesArray[typesArray.length - 2]) {
+                console.log('работает');
+                if (typesArray[typesArray.length - 2] === typesArray[typesArray.length - 3]) {
+                    changePoints *= 2;
+                    this.scoreCoef = 5;
+                }
+                changePoints *= 1.5;
+                this.scoreCoef++;
+            }
             this.scoreCoef++;
             this.score += changePoints;
             this.openCards -= 2;
