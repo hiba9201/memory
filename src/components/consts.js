@@ -1,5 +1,11 @@
 import { randomSortArray } from './utils';
 
+export const bonuses = {
+    double: 1.5,
+    tripple: 2,
+    maxScoreBarValue: 5,
+};
+
 export const gameMods = [
     {
         modeEng: 'veryease',

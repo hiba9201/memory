@@ -1,9 +1,10 @@
 import { randomSortArray, getLimitedScoreCoef } from '../utils';
 import { getRandomCardType } from '../Card/utils';
+import { bonuses } from '../consts';
 import Card from '../Card/Card';
 import GameView from './GameView';
-
 import '../style/style.css';
+
 
 export default class Game {
     constructor(selector, countCards, sameCardCount, scoreReduceSpeed, score, scoreboard) {
@@ -15,6 +16,7 @@ export default class Game {
         this.setCards(countCards, sameCardCount);
         this.setScore(scoreReduceSpeed);
         this.openCards = countCards;
+        this.guessedCardTypesArray = [];
         this.scoreboard = scoreboard;
     }
 
@@ -50,12 +52,20 @@ export default class Game {
         }, 1000);
     }
 
-    updateScorePoints(isGuessedPair) {
+    updateScorePoints(isGuessedPair, typesArray) {
         let changePoints;
         const points = 10000;
 
         if (isGuessedPair) {
             changePoints = points * this.scoreCoef;
+            if (typesArray[typesArray.length - 1] === typesArray[typesArray.length - 2]) {
+                if (typesArray[typesArray.length - 2] === typesArray[typesArray.length - 3]) {
+                    changePoints *= bonuses.tripple;
+                    this.scoreCoef = bonuses.maxScoreBarValue;
+                }
+                changePoints *= bonuses.double;
+                this.scoreCoef++;
+            }
             this.scoreCoef++;
             this.score += changePoints;
             this.openCards -= 2;
